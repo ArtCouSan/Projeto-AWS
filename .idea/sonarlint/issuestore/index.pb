@@ -11,3 +11,7 @@ g
 7trip-lambdas/src/main/java/br/com/trips/model/Trip.java,7\3\73a8f2cc8f9651cfe5ba2fdc6de1cebe83af499b
 o
 ?trip-lambdas/src/main/java/br/com/trips/dao/TripRepository.java,1\5\156f2175ac0341739e9a32edab36fc9b5d55ff46
+p
+@trip-lambdas/src/main/java/br/com/trips/dao/DynamoDBManager.java,6\e\6ef05a899e6cf7b76807efbca28dbf1a67f3f0d6
+o
+?trip-lambdas/src/main/java/br/com/trips/handler/CreateTrip.java,f\a\fa1f70b1318b5b3d5369c6db66095090b841929e

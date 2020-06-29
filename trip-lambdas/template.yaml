@@ -16,7 +16,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: target/aws-sam-java-rest-1.0.0.jar
-      Handler: com.amazonaws.handler.CreateTripFunction::handleRequest
+      Handler: com.amazonaws.handler.CreateTrip::handleRequest
       Runtime: java8
       Events:
         CreateTrip:

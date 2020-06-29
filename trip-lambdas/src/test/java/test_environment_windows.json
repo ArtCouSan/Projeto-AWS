@@ -1,0 +1,6 @@
+{
+	"CreateTripFunction": {
+		"ENDPOINT_OVERRIDE": "http://localhost:8000",
+		"TABLE_NAME": "trip"
+	}
+}
