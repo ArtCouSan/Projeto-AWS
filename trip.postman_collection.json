@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "7acd5cf3-9945-4d1f-af0a-b63e6bf90ddd",
+		"name": "trip",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Trip-AWS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"coutry\": \"Brazil\",\n    \"city\": \"SP\",\n    \"date\": \"2020-06-29T17:00:123\",\n    \"reason\":  \"Business\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/trip",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trip"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
