@@ -18,6 +18,9 @@ Resources:
       CodeUri: target/aws-sam-java-rest-1.0.0.jar
       Handler: com.amazonaws.handler.CreateTrip::handleRequest
       Runtime: java8
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TripTable
       Events:
         CreateTrip:
           Type: Api
