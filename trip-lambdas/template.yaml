@@ -24,3 +24,55 @@ Resources:
           Properties:
             Path: /trip
             Method: post
+  GetTripsByCountryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: target/aws-sam-java-rest-1.0.0.jar
+      Handler: br.com.iwe.handler.GetTripByCountry::handleRequest
+      Runtime: java8
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TripTable
+      Events:
+        GetStudyRecordsByPeriod:
+          Type: Api
+          Properties:
+            Path: /trips
+            Method: get
+            RequestParameters:
+              - method.request.querystring.country
+  GetTripByPeriodFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: target/aws-sam-java-rest-1.0.0.jar
+      Handler: br.com.iwe.handler.GetTripByPeriod::handleRequest
+      Runtime: java8
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TripTable
+      Events:
+        GetStudyRecordsByPeriod:
+          Type: Api
+          Properties:
+            Path: /trips
+            Method: get
+            RequestParameters:
+              - method.request.querystring.starts
+              - method.request.querystring.ends
+  GetTripByCityFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: target/aws-sam-java-rest-1.0.0.jar
+      Handler: br.com.iwe.handler.GetTripByCity::handleRequest
+      Runtime: java8
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TripTable
+      Events:
+        GetStudyRecordsByPeriod:
+          Type: Api
+          Properties:
+            Path: /study/{country}
+            Method: get
+            RequestParameters:
+              - method.request.querystring.city

@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class CreateTrip implements RequestHandler<HandlerRequest, HandlerResponse> {
 
-
     private final TripRepository repository = new TripRepository();
 
     @Override
