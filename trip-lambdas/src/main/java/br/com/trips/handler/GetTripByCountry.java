@@ -16,11 +16,19 @@ public class GetTripByCountry implements RequestHandler<HandlerRequest, HandlerR
     @Override
     public HandlerResponse handleRequest(HandlerRequest request, Context context) {
 
+        final String city = request.getQueryStringParameters().get("city");
         final String country = request.getPathParameters().get("country");
+        List<Trip> trips = null;
 
-        context.getLogger()
-                .log("Searching for registered trips for country");
-        final List<Trip> trips = this.repository.findByCountry(country);
+        if(city != null){
+            context.getLogger()
+                    .log("Searching for registered trips for city");
+            trips = this.repository.findByCity(city, country);
+        }else {
+            context.getLogger()
+                    .log("Searching for registered trips for country");
+            trips = this.repository.findByCountry(country);
+        }
 
         if (trips == null || trips.isEmpty()) {
             return HandlerResponse.builder().setStatusCode(404).build();
