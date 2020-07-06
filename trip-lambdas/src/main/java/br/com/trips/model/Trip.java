@@ -2,6 +2,7 @@ package br.com.trips.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ public class Trip {
     @DynamoDBHashKey(attributeName = "country")
     private String coutry;
 
-    @DynamoDBHashKey(attributeName = "city")
+    @DynamoDBIndexRangeKey(attributeName = "city" , localSecondaryIndexName = "cityIndex")
     private String city;
 
     @DynamoDBAttribute(attributeName = "date")

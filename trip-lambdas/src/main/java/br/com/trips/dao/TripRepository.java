@@ -34,11 +34,13 @@ public class TripRepository {
     public List<Trip> findByCity(final String city, final String country) {
 
         final Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
-        eav.put(":val1", new AttributeValue().withS(city));
-        eav.put(":val2", new AttributeValue().withS(country));
+        eav.put(":val1", new AttributeValue().withS(country));
+        eav.put(":val2", new AttributeValue().withS(city));
 
         final DynamoDBQueryExpression<Trip> queryExpression = new DynamoDBQueryExpression<Trip>()
-                .withKeyConditionExpression("city like :val1 and country =:val2").withExpressionAttributeValues(eav);
+                .withKeyConditionExpression("country =:val1")
+                .withFilterExpression("contains(city, :val2)")
+                .withExpressionAttributeValues(eav);
 
         final List<Trip> trips = mapper.query(Trip.class, queryExpression);
 
@@ -47,13 +49,19 @@ public class TripRepository {
 
     public List<Trip> findByPeriod(final String starts, final String ends) {
 
-        final Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();;
+        final Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+        ;
         eav.put(":val1", new AttributeValue().withS(starts));
         eav.put(":val2", new AttributeValue().withS(ends));
 
+        final Map<String, String> expression = new HashMap<>();
+
+        // date is a reserver word in DynamoDB
+        expression.put("#date", "date");
+
         final DynamoDBQueryExpression<Trip> queryExpression = new DynamoDBQueryExpression<Trip>()
-                .withKeyConditionExpression("date between :val1 and :val2")
-                .withExpressionAttributeValues(eav);
+                .withKeyConditionExpression("#date between :val1 and :val2")
+                .withExpressionAttributeValues(eav).withExpressionAttributeNames(expression);
 
         final List<Trip> trips = mapper.query(Trip.class, queryExpression);
 

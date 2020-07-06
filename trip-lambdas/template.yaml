@@ -15,8 +15,8 @@ Resources:
   CreateTripFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: target/aws-sam-java-rest-1.0.0.jar
-      Handler: com.amazonaws.handler.CreateTrip::handleRequest
+      CodeUri: ./target/trip-lambdas-1.0-SNAPSHOT-jar-with-dependencies.jar
+      Handler: br.com.trips.handler.CreateTrip::handleRequest
       Runtime: java8
       Policies:
         - DynamoDBCrudPolicy:
@@ -30,8 +30,8 @@ Resources:
   GetTripsByCountryFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: target/aws-sam-java-rest-1.0.0.jar
-      Handler: br.com.iwe.handler.GetTripByCountry::handleRequest
+      CodeUri: ./target/trip-lambdas-1.0-SNAPSHOT-jar-with-dependencies.jar
+      Handler: br.com.trips.handler.GetTripByCountry::handleRequest
       Runtime: java8
       Policies:
         - DynamoDBCrudPolicy:
@@ -40,15 +40,15 @@ Resources:
         GetStudyRecordsByPeriod:
           Type: Api
           Properties:
-            Path: /trips
+            Path: /trip/{country}
             Method: get
             RequestParameters:
               - method.request.querystring.country
   GetTripByPeriodFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: target/aws-sam-java-rest-1.0.0.jar
-      Handler: br.com.iwe.handler.GetTripByPeriod::handleRequest
+      CodeUri: ./target/trip-lambdas-1.0-SNAPSHOT-jar-with-dependencies.jar
+      Handler: br.com.trips.handler.GetTripByPeriod::handleRequest
       Runtime: java8
       Policies:
         - DynamoDBCrudPolicy:
@@ -57,7 +57,7 @@ Resources:
         GetStudyRecordsByPeriod:
           Type: Api
           Properties:
-            Path: /trips
+            Path: /trip
             Method: get
             RequestParameters:
               - method.request.querystring.starts
@@ -65,8 +65,8 @@ Resources:
   GetTripByCityFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: target/aws-sam-java-rest-1.0.0.jar
-      Handler: br.com.iwe.handler.GetTripByCity::handleRequest
+      CodeUri: ./target/trip-lambdas-1.0-SNAPSHOT-jar-with-dependencies.jar
+      Handler: br.com.trips.handler.GetTripByCity::handleRequest
       Runtime: java8
       Policies:
         - DynamoDBCrudPolicy:
@@ -75,7 +75,48 @@ Resources:
         GetStudyRecordsByPeriod:
           Type: Api
           Properties:
-            Path: /study/{country}
+            Path: /trip/{country}/{city}
             Method: get
             RequestParameters:
+              - method.request.querystring.country
               - method.request.querystring.city
+  TripTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: trip
+      AttributeDefinitions:
+        - AttributeName: country
+          AttributeType: S
+        - AttributeName: city
+          AttributeType: S
+        - AttributeName: date
+          AttributeType: S
+      KeySchema:
+        - AttributeName: country
+          KeyType: HASH
+        - AttributeName: date
+          KeyType: RANGE
+      LocalSecondaryIndexes:
+        - IndexName: cityIndex
+          KeySchema:
+            - AttributeName: country
+              KeyType: HASH
+            - AttributeName: city
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+      BillingMode: PAY_PER_REQUEST
+
+  Outputs:
+    CreateTripFunction:
+      Description: "CreateTripFunction Lambda Function ARN"
+      Value: !GetAtt CreateTripFunction.Arn
+    GetTripsByCountryFunction:
+      Description: "GetTripsByCountryFunction Lambda Function ARN"
+      Value: !GetAtt GetTripsByCountryFunction.Arn
+    GetTripByPeriodFunction:
+      Description: "GetTripByPeriodFunction Lambda Function ARN"
+      Value: !GetAtt GetTripByPeriodFunction.Arn
+    GetTripByCityFunction:
+      Description: "GetTripByCityFunction Lambda Function ARN"
+      Value: !GetAtt GetTripByCityFunction.Arn

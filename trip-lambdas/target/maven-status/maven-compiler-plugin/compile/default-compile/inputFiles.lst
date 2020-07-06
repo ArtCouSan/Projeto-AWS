@@ -1,0 +1,9 @@
+/home/arthur/Projects/Projeto-AWS/trip-lambdas/src/main/java/br/com/trips/handler/GetTripByPeriod.java
+/home/arthur/Projects/Projeto-AWS/trip-lambdas/src/main/java/br/com/trips/handler/CreateTrip.java
+/home/arthur/Projects/Projeto-AWS/trip-lambdas/src/main/java/br/com/trips/handler/GetTripByCountry.java
+/home/arthur/Projects/Projeto-AWS/trip-lambdas/src/main/java/br/com/trips/handler/GetTripByCity.java
+/home/arthur/Projects/Projeto-AWS/trip-lambdas/src/main/java/br/com/trips/model/HandlerRequest.java
+/home/arthur/Projects/Projeto-AWS/trip-lambdas/src/main/java/br/com/trips/model/Trip.java
+/home/arthur/Projects/Projeto-AWS/trip-lambdas/src/main/java/br/com/trips/dao/TripRepository.java
+/home/arthur/Projects/Projeto-AWS/trip-lambdas/src/main/java/br/com/trips/dao/DynamoDBManager.java
+/home/arthur/Projects/Projeto-AWS/trip-lambdas/src/main/java/br/com/trips/model/HandlerResponse.java
