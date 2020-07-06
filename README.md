@@ -1,8 +1,8 @@
-## AWS SAM Application for Managing Study Data Lake
+## AWS SAM Application for Managing Trip Data Lake
 
 This is a sample application to demonstrate how to build an application on AWS Serverless Envinronment using the
 AWS SAM, Amazon API Gateway, AWS Lambda and Amazon DynamoDB.
-It also uses the DynamoDBMapper ORM structure to map Study items in a DynamoDB table to a RESTful API for managing Studies.
+It also uses the DynamoDBMapper ORM structure to map Trips items in a DynamoDB table to a RESTful API for managing Studies.
 
 
 ## Requirements
@@ -30,7 +30,7 @@ mvn install
 1. Start DynamoDB Local in a Docker container. `docker run -p 8000:8000 -v $(pwd)/local/dynamodb:/data/ amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -dbPath /data`
 2. Create the DynamoDB table. `aws dynamodb create-table --table-name trip --attribute-definitions AttributeName=country,AttributeType=S AttributeName=date,AttributeType=S AttributeName=city,AttributeType=S --key-schema AttributeName=country,KeyType=HASH AttributeName=date,KeyType=RANGE --local-secondary-indexes 'IndexName=cityIndex,KeySchema=[{AttributeName=country,KeyType=HASH},{AttributeName=city,KeyType=RANGE}],Projection={ProjectionType=ALL}' --billing-mode PAY_PER_REQUEST --endpoint-url http://localhost:8000`
 
-If the table already exist, you can delete: `aws dynamodb delete-table --table-name study --endpoint-url http://localhost:8000`
+If the table already exist, you can delete: `aws dynamodb delete-table --table-name trip --endpoint-url http://localhost:8000`
 
 3. Start the SAM local API.
  - On a Mac: `sam local start-api --env-vars src/test/java/test_environment_mac.json`
