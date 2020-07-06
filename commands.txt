@@ -1,8 +1,0 @@
-java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-
-aws dynamodb list-tables --endpoint-url http://localhost:8000
-
-sam local start-api --env-vars src/test/java/test_environment_windows.json
-
-docker run -p 8000:8000 -v D:/Projetos/Projeto-AWS/:/local/dynamodb/data/ amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -dbPath /data
-sam local start-api --env-vars src/test/java/test_environment_linux.json
