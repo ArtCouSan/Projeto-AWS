@@ -16,7 +16,7 @@ Resources:
   CreateTripFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://teste-arthur-4/62d78932339a1df51c5838c41f399643
+      CodeUri: s3://entrega/62d78932339a1df51c5838c41f399643
       Handler: br.com.trips.handler.CreateTrip::handleRequest
       Runtime: java8
       Policies:
@@ -32,7 +32,7 @@ Resources:
   GetTripByPeriodFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://teste-arthur-4/62d78932339a1df51c5838c41f399643
+      CodeUri: s3://entrega/62d78932339a1df51c5838c41f399643
       Handler: br.com.trips.handler.GetTripByPeriod::handleRequest
       Runtime: java8
       Policies:
@@ -51,7 +51,7 @@ Resources:
   GetTripByCountryFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://teste-arthur-4/62d78932339a1df51c5838c41f399643
+      CodeUri: s3://entrega/62d78932339a1df51c5838c41f399643
       Handler: br.com.trips.handler.GetTripByCountry::handleRequest
       Runtime: java8
       Policies:
